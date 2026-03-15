@@ -5,7 +5,7 @@ from core.agent_interface import AgentInterface
 from core.sandbox import Sandbox
 from core.tools import ToolRegistry, search_products
 from core.evaluator import Evaluator
-
+from core.loader import load_environment, list_environments
 
 class DemoAgent(AgentInterface):
 
