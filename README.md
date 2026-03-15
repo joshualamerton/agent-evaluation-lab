@@ -126,6 +126,27 @@ python examples/run_demo.py --env research
 
 The system will automatically discover the environment.
 
+Environment Interface
+
+Each environment must expose a class called Environment.
+
+Example structure:
+
+modules/environments/my_environment/scenario.py
+
+class Environment:
+
+    def __init__(self):
+        self.state = {...}
+
+    def apply_action(self, action):
+        ...
+        return self.state
+
+Once added, the environment can be executed with:
+
+python examples/run_demo.py --env my_environment
+
 ## Roadmap
 
 Phase 1  
