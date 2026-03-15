@@ -8,6 +8,10 @@ def load_environment(name):
 
     for folder in os.listdir(base_dir):
 
+        # ignore cache folders
+        if folder.startswith("_"):
+            continue
+
         if folder == name:
 
             module_path = f"modules.environments.{folder}.scenario"
@@ -22,3 +26,22 @@ def load_environment(name):
             )
 
     raise ValueError(f"Environment not found: {name}")
+
+
+def list_environments():
+
+    base_dir = "modules/environments"
+
+    envs = []
+
+    for name in os.listdir(base_dir):
+
+        if name.startswith("_"):
+            continue
+
+        path = os.path.join(base_dir, name)
+
+        if os.path.isdir(path):
+            envs.append(name)
+
+    return sorted(envs)
