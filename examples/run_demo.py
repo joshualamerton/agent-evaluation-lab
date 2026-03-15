@@ -2,7 +2,6 @@ import argparse
 
 from core.loader import load_environment
 from core.agent_interface import AgentInterface
-from core.environment import Environment
 from core.sandbox import Sandbox
 from core.tools import ToolRegistry, search_products
 from core.evaluator import Evaluator
@@ -30,6 +29,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Run an agent inside Agent Evaluation Lab"
     )
+
     parser.add_argument(
         "--env",
         default="ecommerce",
@@ -38,9 +38,8 @@ def main():
 
     args = parser.parse_args()
 
-    scenario = load_environment(args.env)
-
-    env = Environment(scenario)
+    # Load environment dynamically
+    env = load_environment(args.env)
 
     tools = ToolRegistry()
     tools.register("search", search_products)
