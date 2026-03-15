@@ -1,11 +1,11 @@
 import argparse
 
-from core.loader import load_environment
+from core.loader import load_environment, list_environments
 from core.agent_interface import AgentInterface
 from core.sandbox import Sandbox
 from core.tools import ToolRegistry, search_products
 from core.evaluator import Evaluator
-from core.loader import load_environment, list_environments
+
 
 class DemoAgent(AgentInterface):
 
@@ -36,7 +36,20 @@ def main():
         help="Environment name (default: ecommerce)"
     )
 
+    parser.add_argument(
+        "--list-envs",
+        action="store_true",
+        help="List available environments"
+    )
+
     args = parser.parse_args()
+
+    # List environments if requested
+    if args.list_envs:
+        print("Available environments:")
+        for env in list_environments():
+            print("-", env)
+        return
 
     # Load environment dynamically
     env = load_environment(args.env)
